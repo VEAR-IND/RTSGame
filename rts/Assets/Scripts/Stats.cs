@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Stats : MonoBehaviour {
+public  class Stats : MonoBehaviour {
 
     protected int health { get; set; }
 
@@ -19,6 +19,10 @@ public abstract class Stats : MonoBehaviour {
     protected int agility { get; set; }
     protected int movement { get; set; }
 
+    protected Stats(bool clear = false)
+    {
+
+    }
     protected Stats(int health = 100, int mana = 100, int physicalResistance = 1, int magicalResistance = 1, int physicalDamage = 1,
                      int magicalDamage = 1, int criticalDamage = 1, int strength = 1, int intellect = 1, int agility = 1, int movement = 100)
     {
@@ -34,5 +38,23 @@ public abstract class Stats : MonoBehaviour {
         this.agility = agility;
         this.movement = movement;
     }
+    public static Stats operator + (Stats s1, Stats s2)
+    {
+        return new Stats(s1.health + s2.health, s1.mana + s2.mana, s1.physicalResistance + s2.physicalResistance,
+                        s1.magicalResistance + s2.magicalResistance, s1.physicalDamage + s2.physicalDamage,
+                        s1.magicalDamage + s2.magicalDamage, s1.criticalDamage + s2.criticalDamage,
+                        s1.strength + s2.strength, s1.intellect + s2.intellect, s1.agility + s2.agility, 
+                        s1.movement + s2.movement);
+    }
+    public static Stats GetSum(Stats[] stats)
+    {
+        Stats acum = new Stats(false);
+        foreach(Stats s in stats)
+        {
+            acum += s;
+        }
+        return acum;
+     }
+
 }
 
