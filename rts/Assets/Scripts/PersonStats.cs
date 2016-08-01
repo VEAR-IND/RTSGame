@@ -9,6 +9,11 @@ public class PersonStats : Stats
     public int manaMax { get; set; }
     public int manaRegen { get; set; }
 
+
+    public int strengthToHealth { get; set; }
+    public int intellectToMana { get; set; }
+    public int agilityToMovement { get; set; }
+
     public PersonStats(int health = 100, int healthMax = 100, int healthRegen = 1, int mana = 100, int manaMax = 100,
                      int manaRegen = 1, int physicalResistance = 1, int magicalResistance = 1, int physicalDamage = 1,
                      int magicalDamage = 1, int criticalDamage = 1, int strength = 1, int intellect = 1, int agility = 1, int movement = 100)
@@ -109,4 +114,38 @@ public class PersonStats : Stats
     {
         magicalResistance =+ resistanceCount;
     }
+    public virtual void IncreasePhysicalDamage(int damageCount)
+    {
+        physicalDamage = +damageCount;
+    }
+
+    public virtual void IncreaseMagicalDamage(int damageCount)
+    {
+        magicalDamage  = +damageCount;
+    }
+    public virtual void IncreaseCriticalDamage(int damageCount)
+    {
+        criticalDamage = +damageCount;
+    }
+    public virtual void IncreaseMovement(int movementCount)
+    {
+        movement = +movementCount;
+    }
+
+    public virtual void IncreaseStrenght(int strengthCount)
+    {
+        strength = +strengthCount;
+        IncreaseHealthMax(strengthCount * strengthToHealth);
+    }
+    public virtual void IncreaseAgility(int agilityCount)
+    {
+        agility = +agilityCount;
+        IncreaseMovement(agilityCount * agilityToMovement);
+    }
+    public virtual void IncreaseIntellect(int intellectCount)
+    {
+        intellect = +intellectCount;
+        IncreaseManaMax(intellectCount * intellectToMana);
+    }
+
 }

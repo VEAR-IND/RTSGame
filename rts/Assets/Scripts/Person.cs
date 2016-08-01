@@ -2,15 +2,17 @@
 using System.Collections;
 
 
- abstract class Person : MonoBehaviour
+public class Person : MonoBehaviour
 {
     public string personName { get; set; }
-    public PersonStats personStats { get; set; }
+    [SerializeField]
+    private PersonStats personStats;
 
 
     public Person(string personName = "Hero")
     {
         personStats = new PersonStats();
+        this.personName = personName;
     }
 }
 
