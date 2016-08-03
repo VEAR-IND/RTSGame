@@ -202,6 +202,11 @@ public class Mouse_Control : MonoBehaviour {
 			
 	} 
 
+    public ArrayList GetSelectedPersons()
+    {
+        return CurrentlySelectedUnits;
+    }
+
 	void LateUpdate()
 	{
 		UnitsInDrag.Clear ();
@@ -294,7 +299,8 @@ public class Mouse_Control : MonoBehaviour {
 				GameObject ArrayListUnit = CurrentlySelectedUnits [i] as GameObject;
 				ArrayListUnit.transform.FindChild ("Selected").gameObject.active = false;
 				ArrayListUnit.GetComponent<Unit>().Selected = false;
-			}
+                PersonShowStats.DeletePersonStatsText(ArrayListUnit);
+            }
 
 			CurrentlySelectedUnits.Clear();
 		}
@@ -331,7 +337,8 @@ public class Mouse_Control : MonoBehaviour {
 				{
 					CurrentlySelectedUnits.RemoveAt (i);
 					ArrayListUnit.transform.FindChild ("Selected").gameObject.active = false;
-				}
+                    PersonShowStats.DeletePersonStatsText(ArrayListUnit);
+                }
 			}
 
 			return;

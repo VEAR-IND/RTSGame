@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+[System.Serializable]
 public class Person : MonoBehaviour
 {
-    public string personName { get; set; }
-    [SerializeField]
-    private PersonStats personStats;
+
+    public string personName;
+    public bool isStatsShown = false;
+    public PersonStats personStats = new PersonStats();
 
 
-    public Person(string personName = "Hero")
+    public Person(PersonStats personStats, string personName = "Hero")
     {
-        personStats = new PersonStats();
+        this.personStats = personStats;
         this.personName = personName;
     }
 }
