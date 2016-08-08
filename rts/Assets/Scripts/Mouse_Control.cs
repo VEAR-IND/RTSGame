@@ -297,7 +297,7 @@ public class Mouse_Control : MonoBehaviour {
 			for (int i = 0; i < CurrentlySelectedUnits.Count; i++) 
 			{
 				GameObject ArrayListUnit = CurrentlySelectedUnits [i] as GameObject;
-				ArrayListUnit.transform.FindChild ("Selected").gameObject.active = false;
+				ArrayListUnit.transform.FindChild("Selected").gameObject.active = false;
 				ArrayListUnit.GetComponent<Unit>().Selected = false;
                 PersonShowStats.DeletePersonStatsText(ArrayListUnit);
             }

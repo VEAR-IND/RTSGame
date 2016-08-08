@@ -16,12 +16,12 @@ public class Stats {
     public int agility;
     public int movement;
 
-    public Stats(bool clear)
+    public Stats()
     {
 
     }
-
-    public Stats(int health = 100, int mana = 100, int physicalResistance = 1, int magicalResistance = 1, int physicalDamage = 1,
+    
+    public Stats(bool isDefault, int health = 100, int mana = 100, int physicalResistance = 1, int magicalResistance = 1, int physicalDamage = 1,
                      int magicalDamage = 1, int criticalDamage = 1, int strength = 1, int intellect = 1, int agility = 1, int movement = 100)
     {
         this.health = health;
@@ -39,7 +39,7 @@ public class Stats {
 
     public static Stats operator + (Stats s1, Stats s2)
     {
-        return new Stats(s1.health + s2.health, s1.mana + s2.mana, s1.physicalResistance + s2.physicalResistance,
+        return new Stats(true, s1.health + s2.health, s1.mana + s2.mana, s1.physicalResistance + s2.physicalResistance,
                         s1.magicalResistance + s2.magicalResistance, s1.physicalDamage + s2.physicalDamage,
                         s1.magicalDamage + s2.magicalDamage, s1.criticalDamage + s2.criticalDamage,
                         s1.strength + s2.strength, s1.intellect + s2.intellect, s1.agility + s2.agility, 
