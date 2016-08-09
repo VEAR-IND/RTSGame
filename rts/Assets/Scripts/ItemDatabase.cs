@@ -25,6 +25,7 @@ public class ItemDatabase : MonoBehaviour {
             100,
             2.34,
             false,
+            false,
             Item.ItemRarity.Epic
         ));
         database.Add(new Item(
@@ -36,7 +37,21 @@ public class ItemDatabase : MonoBehaviour {
             120,
             3.74,
             false,
-            Item.ItemRarity.Epic        
+            false,
+            Item.ItemRarity.Legendary    
+        ));
+
+        database.Add(new Item(
+            "The Evil Sword",
+            new ItemStats(true, health: -10, physicalDamage: 13, strength: 5, criticalDamage: 2),
+            "Sprites/",
+            "Sword_12",
+            "Sword who kill so many creatures, that soak up with evil",
+            84,
+            5.14,
+            false,
+            false,
+            Item.ItemRarity.Rare
         ));
         database.Add(new Item(
             "Health pousion",
@@ -47,6 +62,7 @@ public class ItemDatabase : MonoBehaviour {
             10,
             0.1,
             true,
+            false,
             Item.ItemRarity.Normal
         ));
         Debug.Log(database.Count);

@@ -14,7 +14,7 @@ public class Item
     public int itemCost;
     public double itemWeight;
     public bool isStackable;
-
+    public bool isConsumable;
     public ItemStats itemStats;
     public ItemRarity itemRariry;
 
@@ -46,7 +46,7 @@ public class Item
         this.id = lastId++;
     }
 
-    public Item(string itemName, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(true)
+    public Item(string itemName, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isConsumable = false, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(true)
     {
         this.itemName = itemName;
         this.itemDiscription = itemDiscription;
@@ -54,12 +54,13 @@ public class Item
         this.itemWeight = itemWeight;
         this.isStackable = isStackable;
         this.itemRariry = itemRariry;
+        this.isConsumable = isConsumable;
     }
-    public Item(string itemName, ItemStats itemStats, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemDiscription, itemCost, itemWeight, isStackable, itemRariry)
+    public Item(string itemName, ItemStats itemStats, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isConsumable = false, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemDiscription, itemCost, itemWeight, isConsumable, isStackable, itemRariry)
     {
         this.itemStats = itemStats;
     }
-    public Item(string itemName, ItemStats itemStats, string itemSpritePath, string itemSpriteName, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemStats, itemDiscription, itemCost, itemWeight, isStackable, itemRariry)
+    public Item(string itemName, ItemStats itemStats, string itemSpritePath, string itemSpriteName, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isConsumable = false, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemStats, itemDiscription, itemCost, itemWeight, isConsumable, isStackable, itemRariry)
     {
         
         Sprite[] sprites = Resources.LoadAll<Sprite>(itemSpritePath);
@@ -72,7 +73,7 @@ public class Item
             }
         }
     }
-    public Item(string itemName, ItemStats itemStats, string itemSpritePath, string itemSpriteName, string itemObjectPath, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemStats, itemSpritePath, itemSpriteName, itemDiscription, itemCost, itemWeight, isStackable, itemRariry)
+    public Item(string itemName, ItemStats itemStats, string itemSpritePath, string itemSpriteName, string itemObjectPath, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isConsumable = false, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemStats, itemSpritePath, itemSpriteName, itemDiscription, itemCost, itemWeight, isConsumable, isStackable, itemRariry)
     {
         string objectPath = Application.dataPath + itemObjectPath;
         if (File.Exists(objectPath))
