@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System;
 
-public class ItemData : MonoBehaviour , IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
+public class ItemData : MonoBehaviour , IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler{
     public Item item;
     public int count = 1;
     public int slotId;
@@ -57,16 +57,17 @@ public class ItemData : MonoBehaviour , IBeginDragHandler, IDragHandler, IEndDra
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Use it");
-        //if (item.isConsumable)
-        //{
-        //    if(this.count >= 1)
-        //    {
-        //        count--;
-        //    }
-        //    if(this.count == 0)
-        //    {
-        //        inv.items[slotId] = new Item();
-        //    }
-        //}
+        if (item.isConsumable)
+        {
+            if (this.count >= 1)
+            {
+                count -= 1;
+            }
+            if (this.count == 0)
+            {
+                inv.DeleteItem(slotId);
+                tooltip.Deactivate();
+            }
+        }
     }
 }

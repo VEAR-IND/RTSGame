@@ -77,6 +77,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void DeleteItem(int slotid)
+    {
+        items[slotid] = new Item();
+        GameObject deleteObj = slots[slotid].transform.GetChild(0).gameObject;
+        deleteObj.transform.parent = null;
+        Destroy(deleteObj);
+    }
+
     int IsExist(int id)
     {
         for (int i = 0; i < items.Count; i++)
