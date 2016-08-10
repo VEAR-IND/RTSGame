@@ -76,7 +76,6 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
     public void DeleteItem(int slotid)
     {
         items[slotid] = new Item();

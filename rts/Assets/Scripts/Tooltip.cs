@@ -7,10 +7,12 @@ public class Tooltip : MonoBehaviour {
     public Item item;
     public string data;
     public GameObject tooltip;
+    public GameObject inventoryPanel;
     
     void Start()
     {
-        tooltip = GameObject.Find("Tooltip");
+        //tooltip = GameObject.Find("Tooltip");
+        //inventoryPanel = GameObject.Find("InventoryPanel");
         tooltip.SetActive(false);
     }
     void Update()
@@ -18,6 +20,10 @@ public class Tooltip : MonoBehaviour {
         if (tooltip.activeSelf)
         {
             tooltip.transform.position = Input.mousePosition;
+        }
+        if (!inventoryPanel.activeInHierarchy)
+        {
+            Deactivate();
         }
     }
     // Use this for initialization

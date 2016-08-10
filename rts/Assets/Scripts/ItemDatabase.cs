@@ -62,7 +62,7 @@ public class ItemDatabase : MonoBehaviour {
             10,
             0.1,
             true,
-            false,
+            true,
             Item.ItemRarity.Normal
         ));
         Debug.Log(database.Count);

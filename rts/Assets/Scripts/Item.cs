@@ -85,4 +85,8 @@ public class Item
             Debug.Log(string.Format("No object!!! at item {}", this.id));
         }
     }
+    public virtual void UseItem()
+    {
+        Debug.Log("Use it");
+    }
 }

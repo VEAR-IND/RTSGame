@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI;
 
 public class ItemData : MonoBehaviour , IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler{
     public Item item;
@@ -56,12 +57,28 @@ public class ItemData : MonoBehaviour , IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Use it");
+        if(eventData.button == PointerEventData.InputButton.Left)
+        {
+            LeftClick(eventData);
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            RightClick(eventData);
+        }
+    }
+    private void RightClick(PointerEventData eventData)
+    {
+        Debug.Log("Use it right");
+    }
+    private void LeftClick(PointerEventData eventData)
+    {
+        Debug.Log("Use it left");
         if (item.isConsumable)
         {
             if (this.count >= 1)
             {
                 count -= 1;
+                transform.GetChild(0).GetComponent<Text>().text = count.ToString();
             }
             if (this.count == 0)
             {

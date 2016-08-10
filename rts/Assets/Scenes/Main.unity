@@ -525,7 +525,8 @@ MonoBehaviour:
     itemSpite: {fileID: 0}
     itemObject: {fileID: 0}
   data: 
-  tooltip: {fileID: 0}
+  tooltip: {fileID: 1609899294}
+  inventoryPanel: {fileID: 1727699859}
 --- !u!1 &393900592 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 137596, guid: bc910735b4ee9e341881dc2df2ee3f96, type: 2}
@@ -1516,7 +1517,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 601791ccaa82ac3469856b673164f3ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94efdc11dbfeab740b0c37e1b0488dbc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
