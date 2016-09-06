@@ -35,6 +35,7 @@ public class  PersonShowStats : MonoBehaviour {
             }
             foreach (GameObject unit in units)
             {
+                Stats inventoryStats = unit.transform.GetChild(1).GetComponent<PlaceholderInventory>().stats;
                 var unitClass = unit.GetComponent<Person>();
                 unitClass.personStats.ShowStats();
                 GameObject g = new GameObject();
@@ -67,7 +68,14 @@ public class  PersonShowStats : MonoBehaviour {
                 Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
                 t.font = ArialFont;
                 t.fontSize = 4;
-                t.text = unit.GetComponent<Person>().personStats.GetStats();
+                if (inventoryStats != null)
+                {
+                    t.text = unit.GetComponent<Person>().personStats.GetStats(inventoryStats: inventoryStats);
+                }
+                else
+                {
+                    t.text = unit.GetComponent<Person>().personStats.GetStats();
+                }
                 t.enabled = true;
                 t.color = Color.black;
                 
@@ -91,7 +99,7 @@ public class  PersonShowStats : MonoBehaviour {
             if(g.transform.IsChildOf(ArrayListUnit.transform))
             {
                 ArrayListUnit.GetComponent<Person>().isStatsShown = false;
-                g.transform.parent = null;
+                g.transform.SetParent(null);
                 Destroy(g);
             }
         }       

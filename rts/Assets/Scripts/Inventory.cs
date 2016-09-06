@@ -29,20 +29,21 @@ public class Inventory : MonoBehaviour
             slots[i].GetComponent<Slot>().id = i;
             slots[i].transform.SetParent(slotPanel.transform);
         }
-        AddItem(0);
-        AddItem(1);
-        AddItem(2);
-        AddItem(3);
-        AddItem(3);
+        AddAllItems();
+    }
+    public void AddAllItems()
+    {
+        foreach(Item item in database.database)
+        {
+            AddItem(item.id);
+        }
     }
 
     public void AddItem(int id)
-    {
-        
+    {        
         if (database.GetById(id) != null)
         {            
             Item itemToAdd = database.GetById(id);
-
             if (itemToAdd.isStackable && IsExist(itemToAdd.id) != -1)
             {
                 for (int i = 0; i < slots.Count; i++)
@@ -83,7 +84,6 @@ public class Inventory : MonoBehaviour
         deleteObj.transform.parent = null;
         Destroy(deleteObj);
     }
-
     int IsExist(int id)
     {
         for (int i = 0; i < items.Count; i++)
