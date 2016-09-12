@@ -97,19 +97,22 @@ public class Mouse_Control : MonoBehaviour {
 					//1 right
 					//2middle
 
-					if (Input.GetMouseButtonDown (1)) {
-						GameObject TargetObj = Instantiate (Target, hit.point, Quaternion.identity) as GameObject;
-						TargetObj.name = "Target Instantiated";
-						RightClickPoint = hit.point;
-
-					} 
-					else if (Input.GetMouseButtonUp (0) && DidUserClickedLeftMouse (mouseDownPoint)) {
-						if (!Common.ShiftKeysDown ())
-							DeselectGameObjectsIfSelected ();
-
-					}
+					
 				
-				} //end of terrain!
+                    if(Input.GetMouseButtonDown(1))
+                    {
+                        GameObject TargetObj = Instantiate(Target, hit.point, Quaternion.identity) as GameObject;
+                        TargetObj.name = "Target Instantiated";
+                        RightClickPoint = hit.point;
+
+                    }
+                    else if (Input.GetMouseButtonUp(0) && DidUserClickedLeftMouse(mouseDownPoint))
+                    {
+                        if (!Common.ShiftKeysDown())
+                            DeselectGameObjectsIfSelected();
+                    }
+
+                } //end of terrain!
 
 			else {
 					//hitting other objects

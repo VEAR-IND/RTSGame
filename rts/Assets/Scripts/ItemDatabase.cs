@@ -165,7 +165,7 @@ public class ItemDatabase : MonoBehaviour {
         else return null;
    }
 
-   public string GenerateUniqueNumber()
+   public static string GenerateUniqueNumber()
    {
         long ticks = DateTime.Now.Ticks;
         byte[] bytes = BitConverter.GetBytes(ticks);

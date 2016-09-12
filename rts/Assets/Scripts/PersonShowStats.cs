@@ -2,19 +2,25 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class  PersonShowStats : MonoBehaviour {
-        
+public class PersonShowStats : MonoBehaviour
+{
+
     public ArrayList CurrentlySelectedUnits;
     public GameObject g;
     private float fTextLabelHeight = 0;
+    public Camera m_Camera;
 
-    // Use this for initialization
-    void Start () 
+    void Start()
     {
+        m_Camera = GameObject.Find("Camera").GetComponent<Camera>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    void TextUpdate()
+    {
+
+    }
+    // Update is called once per frame
+    void Update()
     {
         CurrentlySelectedUnits = GameObject.Find("MouseControllWorld").GetComponent<Mouse_Control>().GetSelectedPersons();
         CreatePersonStatsText();
@@ -24,8 +30,7 @@ public class  PersonShowStats : MonoBehaviour {
         if (CurrentlySelectedUnits.Count != 0)
         {
             ArrayList units = new ArrayList();
-
-            foreach(GameObject unit in CurrentlySelectedUnits)
+            foreach (GameObject unit in CurrentlySelectedUnits)
             {
                 if (!unit.GetComponent<Person>().isStatsShown)
                 {
@@ -35,7 +40,8 @@ public class  PersonShowStats : MonoBehaviour {
             }
             foreach (GameObject unit in units)
             {
-                Stats inventoryStats = unit.transform.GetChild(1).GetComponent<PlaceholderInventory>().stats;
+                PlaceholderInventory pInv = unit.transform.FindChild("Inventory").gameObject.GetComponent<PlaceholderInventory>();
+                Stats inventoryStats = pInv.stats;
                 var unitClass = unit.GetComponent<Person>();
                 unitClass.personStats.ShowStats();
                 GameObject g = new GameObject();
@@ -47,7 +53,7 @@ public class  PersonShowStats : MonoBehaviour {
 
                 Canvas canvas = g.AddComponent<Canvas>();
                 canvas.renderMode = RenderMode.WorldSpace;
-                
+
                 CanvasScaler cs = g.AddComponent<CanvasScaler>();
                 cs.scaleFactor = 10.0f;
                 cs.dynamicPixelsPerUnit = 10f;
@@ -70,15 +76,15 @@ public class  PersonShowStats : MonoBehaviour {
                 t.fontSize = 4;
                 if (inventoryStats != null)
                 {
-                    t.text = unit.GetComponent<Person>().personStats.GetStats(inventoryStats: inventoryStats);
+                    t.text = unitClass.personStats.GetStats(inventoryStats: inventoryStats);
                 }
                 else
                 {
-                    t.text = unit.GetComponent<Person>().personStats.GetStats();
+                    t.text = unitClass.personStats.GetStats();
                 }
                 t.enabled = true;
                 t.color = Color.black;
-                
+
                 bool bWorldPosition = false;
 
 
@@ -87,6 +93,7 @@ public class  PersonShowStats : MonoBehaviour {
                                                      1.0f / this.transform.localScale.x * 0.1f,
                                                      1.0f / this.transform.localScale.y * 0.1f,
                                                      1.0f / this.transform.localScale.z * 0.1f);
+               
             }
         }
     }
@@ -94,15 +101,19 @@ public class  PersonShowStats : MonoBehaviour {
     {
         GameObject[] allLables = GameObject.FindGameObjectsWithTag("TextLable");
 
-        foreach(GameObject g in allLables)
+        foreach (GameObject g in allLables)
         {
-            if(g.transform.IsChildOf(ArrayListUnit.transform))
+            if (g.transform.IsChildOf(ArrayListUnit.transform))
             {
                 ArrayListUnit.GetComponent<Person>().isStatsShown = false;
                 g.transform.SetParent(null);
                 Destroy(g);
             }
-        }       
+        }
+    }
+
+    public void SetText()
+    {
+        
     }
 }
-

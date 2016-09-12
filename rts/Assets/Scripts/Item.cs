@@ -8,6 +8,20 @@ using System;
 public class Item
 {
     private static int lastId = 0;
+    internal bool isEmpty
+    {
+        get
+        {
+            return id == -1 && this != null;
+        }
+    }
+    internal Type Type
+    {
+        get
+        {
+            return this.GetType();
+        }
+    }
 
     public int id;
     public string itemName;
