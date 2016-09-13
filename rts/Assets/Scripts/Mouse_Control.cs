@@ -97,19 +97,22 @@ public class Mouse_Control : MonoBehaviour {
 					//1 right
 					//2middle
 
-					if (Input.GetMouseButtonDown (1)) {
-						GameObject TargetObj = Instantiate (Target, hit.point, Quaternion.identity) as GameObject;
-						TargetObj.name = "Target Instantiated";
-						RightClickPoint = hit.point;
-
-					} 
-					else if (Input.GetMouseButtonUp (0) && DidUserClickedLeftMouse (mouseDownPoint)) {
-						if (!Common.ShiftKeysDown ())
-							DeselectGameObjectsIfSelected ();
-
-					}
+					
 				
-				} //end of terrain!
+                    if(Input.GetMouseButtonDown(1))
+                    {
+                        GameObject TargetObj = Instantiate(Target, hit.point, Quaternion.identity) as GameObject;
+                        TargetObj.name = "Target Instantiated";
+                        RightClickPoint = hit.point;
+
+                    }
+                    else if (Input.GetMouseButtonUp(0) && DidUserClickedLeftMouse(mouseDownPoint))
+                    {
+                        if (!Common.ShiftKeysDown())
+                            DeselectGameObjectsIfSelected();
+                    }
+
+                } //end of terrain!
 
 			else {
 					//hitting other objects
@@ -202,6 +205,11 @@ public class Mouse_Control : MonoBehaviour {
 			
 	} 
 
+    public ArrayList GetSelectedPersons()
+    {
+        return CurrentlySelectedUnits;
+    }
+
 	void LateUpdate()
 	{
 		UnitsInDrag.Clear ();
@@ -292,9 +300,10 @@ public class Mouse_Control : MonoBehaviour {
 			for (int i = 0; i < CurrentlySelectedUnits.Count; i++) 
 			{
 				GameObject ArrayListUnit = CurrentlySelectedUnits [i] as GameObject;
-				ArrayListUnit.transform.FindChild ("Selected").gameObject.active = false;
+				ArrayListUnit.transform.FindChild("Selected").gameObject.active = false;
 				ArrayListUnit.GetComponent<Unit>().Selected = false;
-			}
+                PersonShowStats.DeletePersonStatsText(ArrayListUnit);
+            }
 
 			CurrentlySelectedUnits.Clear();
 		}
@@ -331,7 +340,8 @@ public class Mouse_Control : MonoBehaviour {
 				{
 					CurrentlySelectedUnits.RemoveAt (i);
 					ArrayListUnit.transform.FindChild ("Selected").gameObject.active = false;
-				}
+                    PersonShowStats.DeletePersonStatsText(ArrayListUnit);
+                }
 			}
 
 			return;

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Target
   - Ground
+  - TextLable
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Ground
   - Unit
   - Obstacle
-  - 
+  - Chests
   - 
   - 
   - 

@@ -1,32 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class PersonStats : Stats
 {
-    public int healthMax { get; set; }
-    public int healthRegen { get; set; }
+    //vars
+    public int healthMax;
+    public int healthRegen;
+    public int manaMax;
+    public int manaRegen;
+    public int strengthToHealth;
+    public int intellectToMana;
+    public int agilityToMovement;
 
-    public int manaMax { get; set; }
-    public int manaRegen { get; set; }
+    //flags
+    public bool isAlive = true;
 
-
-    public int strengthToHealth { get; set; }
-    public int intellectToMana { get; set; }
-    public int agilityToMovement { get; set; }
-
-    public PersonStats(int health = 100, int healthMax = 100, int healthRegen = 1, int mana = 100, int manaMax = 100,
-                     int manaRegen = 1, int physicalResistance = 1, int magicalResistance = 1, int physicalDamage = 1,
-                     int magicalDamage = 1, int criticalDamage = 1, int strength = 1, int intellect = 1, int agility = 1, int movement = 100)
-        :base(health, mana, physicalResistance, magicalResistance, physicalDamage, magicalDamage, criticalDamage, strength, intellect, agility, movement)
+    //ctors
+    public PersonStats() { }
+    public PersonStats(bool isDefault, int strengthToHealth = 0, int intellectToMana = 0, int agilityToMovement = 0, int health = 100,
+                       int healthMax = 100, int healthRegen = 1, int mana = 100, int manaMax = 100, int manaRegen = 1,
+                       int physicalResistance = 1, int magicalResistance = 1, int physicalDamage = 1, int magicalDamage = 1,
+                       int criticalDamage = 1, int strength = 1, int intellect = 1, int agility = 1, int movement = 100)
+        :base(isDefault, health, mana, physicalResistance, magicalResistance, physicalDamage, magicalDamage, criticalDamage, strength,
+            intellect, agility, movement)
     {        
         this.healthMax = healthMax;
         this.healthRegen = healthRegen;
-
-        this.mana = mana;
-        this.manaMax = manaMax;       
+        this.manaMax = manaMax;
+        this.manaRegen = manaRegen;
+        this.strengthToHealth = strengthToHealth;
+        this.intellectToMana = intellectToMana;
+        this.agilityToMovement = agilityToMovement;
     }
 
-    //substract demageCount from person health 
+    //metods
+    public override void ShowStats(string stringConcat = "")
+    {                   
+        base.ShowStats(string.Format(", hpMax:{0}, hpReg:{1}, manaMax:{2}, manaReg:{3}" +stringConcat, healthMax, healthRegen, manaMax, manaRegen));
+    }
+
+    public override string GetStats(string stringConcat = "")
+    {
+       return base.GetStats(string.Format(", hpMax:{0}\n, hpReg:{1}\n, manaMax:{2}\n, manaReg:{3}\n" + stringConcat, healthMax, healthRegen, manaMax, manaRegen));
+    }
+    public override string GetStats(Stats inventoryStats, string stringConcat = "")
+    {
+        return base.GetStats(inventoryStats, string.Format(", hpMax:{0}\n, hpReg:{1}\n, manaMax:{2}\n, manaReg:{3}\n" + stringConcat, healthMax, healthRegen, manaMax, manaRegen));
+    }
+
     public virtual void OnDamage(int damageCount)
     {
         if (health - damageCount >= 0)
@@ -36,37 +58,46 @@ public class PersonStats : Stats
         else
         {
             health = 0;
+            isAlive = false;
         }
     }
 
     public virtual void OnHealthRegen()
     {
-        while (health != healthMax)
+        if (isAlive)
         {
-            if (health + healthRegen <= healthMax)
+            while (health != healthMax)
             {
-                health = +healthRegen;
-            }
-            else
-            {
-                health = healthMax;
+                if (health + healthRegen <= healthMax)
+                {
+                    health = +healthRegen;
+                }
+                else
+                {
+                    health = healthMax;
+                }
             }
         }
     }
+
     public virtual void OnHealthRegen(int healthCount)
     {
-        while (health != healthMax)
+        if (isAlive)
         {
-            if (health + healthCount <= healthMax)
+            while (health != healthMax)
             {
-                health = +healthCount;
-            }
-            else
-            {
-                health = healthMax;
+                if (health + healthCount <= healthMax)
+                {
+                    health = +healthCount;
+                }
+                else
+                {
+                    health = healthMax;
+                }
             }
         }
     }
+
     public virtual void IncreaseHealthMax(int healthCount)
     {
         healthMax =+ healthCount;
@@ -74,37 +105,39 @@ public class PersonStats : Stats
 
     public virtual void OnManaRegen()
     {
-        while (health != healthMax)
+        while (mana != manaMax)
         {
-            if (health + healthRegen <= healthMax)
+            if (mana + manaRegen <= manaMax)
             {
-                health = +healthRegen;
+                mana = +manaRegen;
             }
             else
             {
-                health = healthMax;
+                mana = manaMax;
             }
         }
     }
+
     public virtual void OnManaRegen(int manaCount)
     {
-        while (health != healthMax)
+        while (mana != healthMax)
         {
-            if (health + manaCount <= healthMax)
+            if (mana + manaCount <= healthMax)
             {
-                health = +manaCount;
+                mana = +manaCount;
             }
             else
             {
-                health = healthMax;
+                mana = manaMax;
             }
         }
     }
+
     public virtual void IncreaseManaMax(int manaCount)
     {
         manaMax = +manaCount;
     }
-
+    
     public virtual void IncreasePhysicalResistance(int resistanceCount)
     {
         physicalResistance =+ resistanceCount;
@@ -114,6 +147,7 @@ public class PersonStats : Stats
     {
         magicalResistance =+ resistanceCount;
     }
+
     public virtual void IncreasePhysicalDamage(int damageCount)
     {
         physicalDamage = +damageCount;
@@ -123,10 +157,12 @@ public class PersonStats : Stats
     {
         magicalDamage  = +damageCount;
     }
+
     public virtual void IncreaseCriticalDamage(int damageCount)
     {
         criticalDamage = +damageCount;
     }
+
     public virtual void IncreaseMovement(int movementCount)
     {
         movement = +movementCount;
@@ -137,15 +173,16 @@ public class PersonStats : Stats
         strength = +strengthCount;
         IncreaseHealthMax(strengthCount * strengthToHealth);
     }
+
     public virtual void IncreaseAgility(int agilityCount)
     {
         agility = +agilityCount;
         IncreaseMovement(agilityCount * agilityToMovement);
     }
+
     public virtual void IncreaseIntellect(int intellectCount)
     {
         intellect = +intellectCount;
         IncreaseManaMax(intellectCount * intellectToMana);
     }
-
 }
