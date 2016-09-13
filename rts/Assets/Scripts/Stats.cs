@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Assets.Scripts;
+
 [System.Serializable]
 
 public class Stats {
@@ -46,7 +49,7 @@ public class Stats {
                         s1.movement + s2.movement);
     }
 
-    public static Stats GetSum(Stats[] stats)
+    public static Stats GetSum(List<Stats> stats)
     {
         Stats acum = new Stats(false);
         foreach(Stats s in stats)
@@ -69,6 +72,14 @@ public class Stats {
                 + strConcat, health, mana, physicalResistance, magicalResistance, physicalDamage,
                 magicalDamage, criticalDamage, strength, intellect, agility, movement);
     }
+    public virtual string GetStats(Stats inventoryStats, string strConcat = "" )
+    {
+        return string.Format("hp:{0}{11}\nmana:{1}{12}\npRes:{2}{13}\nmRes:{3}{14}\npDmg:{4}{15}\nmDmg:{5}{16}\ncDmg:{6}{17}\nst:{7}{18}\ni:{8}{19}\nag:{9}{20}\nm:{10}{21}\n"
+                + strConcat, health, mana, physicalResistance, magicalResistance, physicalDamage,
+                magicalDamage, criticalDamage, strength, intellect, agility, movement, Helper.MakeColor(inventoryStats.health), Helper.MakeColor(inventoryStats.mana), Helper.MakeColor(inventoryStats.physicalResistance), Helper.MakeColor(inventoryStats.magicalResistance), Helper.MakeColor(inventoryStats.physicalDamage),
+                Helper.MakeColor(inventoryStats.magicalDamage), Helper.MakeColor(inventoryStats.criticalDamage), Helper.MakeColor(inventoryStats.strength), Helper.MakeColor(inventoryStats.intellect), Helper.MakeColor(inventoryStats.agility), Helper.MakeColor(inventoryStats.movement));
+    }
 
+    
 }
 

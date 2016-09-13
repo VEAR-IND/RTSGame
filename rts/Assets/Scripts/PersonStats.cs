@@ -44,6 +44,10 @@ public class PersonStats : Stats
     {
        return base.GetStats(string.Format(", hpMax:{0}\n, hpReg:{1}\n, manaMax:{2}\n, manaReg:{3}\n" + stringConcat, healthMax, healthRegen, manaMax, manaRegen));
     }
+    public override string GetStats(Stats inventoryStats, string stringConcat = "")
+    {
+        return base.GetStats(inventoryStats, string.Format(", hpMax:{0}\n, hpReg:{1}\n, manaMax:{2}\n, manaReg:{3}\n" + stringConcat, healthMax, healthRegen, manaMax, manaRegen));
+    }
 
     public virtual void OnDamage(int damageCount)
     {

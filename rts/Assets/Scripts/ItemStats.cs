@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 [System.Serializable]
 public class ItemStats : Stats
@@ -144,5 +146,30 @@ public class ItemStats : Stats
             }
         }
         return temp + strConcat;
+    }
+    
+    public static ItemStats operator +(ItemStats s1, ItemStats s2)
+    {
+        return new ItemStats(true, s1.health + s2.health, s1.mana + s2.mana, s1.physicalResistance + s2.physicalResistance,
+                        s1.magicalResistance + s2.magicalResistance, s1.physicalDamage + s2.physicalDamage,
+                        s1.magicalDamage + s2.magicalDamage, s1.criticalDamage + s2.criticalDamage,
+                        s1.strength + s2.strength, s1.intellect + s2.intellect, s1.agility + s2.agility,
+                        s1.movement + s2.movement);
+    }
+    public static ItemStats GetSum(List<ItemStats> stats)
+    {
+        if (stats != null)
+        {
+            ItemStats acum = new ItemStats(false);
+            foreach (ItemStats s in stats)
+            {
+                acum += s;
+            }
+            return acum;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

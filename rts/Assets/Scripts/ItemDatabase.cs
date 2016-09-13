@@ -16,7 +16,7 @@ public class ItemDatabase : MonoBehaviour {
     }
     void Start ()
     {
-        database.Add(new Item(
+        database.Add(new WeaponItem(
             "Bloody King",
             new ItemStats(true, physicalDamage: 12, strength: 4, criticalDamage: 10),
             "Sprites/",
@@ -28,7 +28,7 @@ public class ItemDatabase : MonoBehaviour {
             false,
             Item.ItemRarity.Epic
         ));
-        database.Add(new Item(
+        database.Add(new WeaponItem(
             "The Big Ocean Sword",
             new ItemStats(true, physicalDamage: 16, strength: 3, criticalDamage: 2, agility: 2, mana: 50),
             "Sprites/",
@@ -41,7 +41,7 @@ public class ItemDatabase : MonoBehaviour {
             Item.ItemRarity.Legendary    
         ));
 
-        database.Add(new Item(
+        database.Add(new WeaponItem(
             "The Evil Sword",
             new ItemStats(true, health: -10, physicalDamage: 13, strength: 5, criticalDamage: 2),
             "Sprites/",
@@ -65,7 +65,73 @@ public class ItemDatabase : MonoBehaviour {
             true,
             Item.ItemRarity.Normal
         ));
-        Debug.Log(database.Count);
+
+        database.Add(new HelmetItem(
+            "Leather helmet",
+            new ItemStats(true, physicalResistance:20, movement: 1),
+            "Sprites/",
+            "Sets_0",
+            "One of the cheapest and lightest helmet, not match resistanse, but it do'nt hold down movements",18,
+            0.3,
+            false,
+            false,
+            Item.ItemRarity.Normal
+        ));
+        database.Add(new ChestItem(
+            "Leather chest",
+            new ItemStats(true, physicalResistance: 40, movement: 1),
+            "Sprites/",
+            "Sets_5",
+            "One of the cheapest and lightest chest, not match resistanse, but it do'nt hold down movements", 57,
+            0.7,
+            false,
+            false,
+            Item.ItemRarity.Normal
+        ));
+        database.Add(new PantsItem(
+            "Leather pants",
+            new ItemStats(true, physicalResistance: 32, movement: 1),
+            "Sprites/",
+            "Sets_10",
+            "One's of the cheapest and lightest pants, not match resistanse, but they do'nt hold down movements", 34,
+            0.65,
+            false,
+            false,
+            Item.ItemRarity.Normal
+        ));
+        database.Add(new BootsItem(
+            "Leather boots",
+            new ItemStats(true, physicalResistance: 18, movement: 1),
+            "Sprites/",
+            "Sets_15",
+            "One's of the cheapest and lightest boots, not match resistanse, but they do'nt hold down movements", 26,
+            0.42,
+            false,
+            false,
+            Item.ItemRarity.Normal
+        ));
+        database.Add(new GlovesItem(
+           "Leather gloves",
+           new ItemStats(true, physicalResistance: 9, movement: 1),
+           "Sprites/",
+           "Sets_20",
+           "One's of the cheapest and lightest gloves, not match resistanse, but they do'nt hold down movements", 12,
+           0.15,
+           false,
+           false,
+           Item.ItemRarity.Normal
+       ));
+        database.Add(new ShealdItem(
+           "Leather sheald",
+           new ItemStats(true, physicalResistance: 43, movement: 1),
+           "Sprites/",
+           "Sets_25",
+           "One's of the cheapest and lightest sheald, not match resistanse, but it do'nt hold down movements", 52,
+           0.95,
+           false,
+           false,
+           Item.ItemRarity.Normal
+       ));
     }
 	
 	void Update ()
@@ -99,7 +165,7 @@ public class ItemDatabase : MonoBehaviour {
         else return null;
    }
 
-   public string GenerateUniqueNumber()
+   public static string GenerateUniqueNumber()
    {
         long ticks = DateTime.Now.Ticks;
         byte[] bytes = BitConverter.GetBytes(ticks);

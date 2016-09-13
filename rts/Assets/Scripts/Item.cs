@@ -2,11 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 [System.Serializable]
 public class Item
 {
     private static int lastId = 0;
+    internal bool isEmpty
+    {
+        get
+        {
+            return id == -1 && this != null;
+        }
+    }
+    internal Type Type
+    {
+        get
+        {
+            return this.GetType();
+        }
+    }
 
     public int id;
     public string itemName;
@@ -56,6 +71,12 @@ public class Item
         this.itemRariry = itemRariry;
         this.isConsumable = isConsumable;
     }
+
+    public virtual Item Erase()
+    {
+        return new Item();
+    }
+
     public Item(string itemName, ItemStats itemStats, string itemDiscription = "This is...", int itemCost = 10, double itemWeight = 1, bool isConsumable = false, bool isStackable = false, ItemRarity itemRariry = ItemRarity.Junk) : this(itemName, itemDiscription, itemCost, itemWeight, isConsumable, isStackable, itemRariry)
     {
         this.itemStats = itemStats;
@@ -88,5 +109,17 @@ public class Item
     public virtual void UseItem()
     {
         Debug.Log("Use it");
+    }
+
+   
+    public static List<ItemStats> Stats(List<Item> items)
+    {
+        List<ItemStats> returnList = new List<ItemStats>();
+        foreach (Item item in items.FindAll(i => i.id != -1))
+        {
+            returnList.Add(item.itemStats);
+        }
+
+        return returnList.Count != 0 ? returnList: null;
     }
 }
